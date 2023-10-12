@@ -20,27 +20,6 @@ app.use(cors());
 app.use(logger('dev'));
 
 
-// // mongoDB connection
-// mongoose
-//     .connect(process.env.ONLINEDB, {
-//         useNewUrlParser: true,
-//         useUnifiedTopology: true,
-//     })
-//     .then(() => {
-//         console.log("MongoDB atlas connected");
-//     })
-//     .catch(console.log);
-//
-
-
-// mongoose.connect(process.env.ONLINEDB, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-// }).then(() => {
-//     console.log('Connected to MongoDB');
-// }).catch((error) => {
-//     console.error('MongoDB connection error:', error);
-// });
 
 
 // Routes register
@@ -60,7 +39,7 @@ app.use((req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-    const statusCode = res.statusCode !== 200 ? res.statusCode : 500;
+    const statusCode = res.statusCode || 500;
     res.status(statusCode);
     res.json({
         message: err.message,
