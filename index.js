@@ -2,10 +2,13 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+const mongoose = require("mongoose");
+const dotenv = require('dotenv').config();
 
 
 // route import 
-const indexRoute = require("./routes/home");
+const indexRoute = require("./routes/index.route");
+const todoRoute = require("./routes/todo.route");
 
 
 // create express app
@@ -17,10 +20,33 @@ app.use(cors());
 app.use(logger('dev'));
 
 
+// // mongoDB connection
+// mongoose
+//     .connect(process.env.ONLINEDB, {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true,
+//     })
+//     .then(() => {
+//         console.log("MongoDB atlas connected");
+//     })
+//     .catch(console.log);
+//
+
+
+mongoose.connect(process.env.ONLINEDB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
+    console.log('Connected to MongoDB');
+}).catch((error) => {
+    console.error('MongoDB connection error:', error);
+});
+
+
 // Routes register
 app.use("/", indexRoute);
 app.use("/api", indexRoute);
-
+app.use("/api/todos", todoRoute);
 
 
 // connection
@@ -39,5 +65,6 @@ app.use((err, req, res, next) => {
     res.json({
         message: err.message,
     });
-})
+});
+
 app.listen(port, () => console.log(`Listening to port ${port}`));
