@@ -33,14 +33,14 @@ app.use(logger('dev'));
 //
 
 
-mongoose.connect(process.env.ONLINEDB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log('Connected to MongoDB');
-}).catch((error) => {
-    console.error('MongoDB connection error:', error);
-});
+// mongoose.connect(process.env.ONLINEDB, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+// }).then(() => {
+//     console.log('Connected to MongoDB');
+// }).catch((error) => {
+//     console.error('MongoDB connection error:', error);
+// });
 
 
 // Routes register
