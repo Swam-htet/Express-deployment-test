@@ -20,6 +20,16 @@ app.use(cors());
 app.use(logger('dev'));
 
 
+mongoose
+    .connect(process.env.ONLINEDB, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => {
+        console.log("MongoDB connected");
+    })
+    .catch(console.log);
+
 
 
 // Routes register
